@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_195920) do
+ActiveRecord::Schema.define(version: 2021_10_29_204352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.bigint "requestor_id", null: false
+    t.bigint "requestee_id", null: false
+    t.boolean "is_pending", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["requestee_id"], name: "index_friend_requests_on_requestee_id"
+    t.index ["requestor_id"], name: "index_friend_requests_on_requestor_id"
+  end
 
   create_table "user_friends", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -37,6 +47,8 @@ ActiveRecord::Schema.define(version: 2021_10_29_195920) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "friend_requests", "users", column: "requestee_id"
+  add_foreign_key "friend_requests", "users", column: "requestor_id"
   add_foreign_key "user_friends", "users"
   add_foreign_key "user_friends", "users", column: "friend_id"
 end

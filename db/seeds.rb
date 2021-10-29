@@ -7,10 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # First delete all data and reset id counter(not necessary, I just like it :))
-User.delete_all
-ActiveRecord::Base.connection.reset_pk_sequence!('users')
+FriendRequest.delete_all
+ActiveRecord::Base.connection.reset_pk_sequence!('friend_requests')
 UserFriend.delete_all
 ActiveRecord::Base.connection.reset_pk_sequence!('user_friends')
+User.delete_all
+ActiveRecord::Base.connection.reset_pk_sequence!('users')
 
 User.create(email: 'jake@email.com', password: 'password', name: 'Jake')
 User.create(email: 'eric@email.com', password: 'password', name: 'Eric')
