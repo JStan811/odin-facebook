@@ -4,7 +4,7 @@
   <% @users.each do |user| %>
     <% unless user == current_user %>
       <li>
-          <%= link_to user.name, user %>
+          <%= link_to user.name, user.profile %>
       </li>
     <% end %>
   <% end %>

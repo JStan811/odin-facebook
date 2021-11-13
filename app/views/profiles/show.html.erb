@@ -1,0 +1,15 @@
+<h2><%= @profile.user.name %></h2>
+
+<p>photo: <%= @profile.photo_url %>
+
+<p>bio: <%= @profile.bio %></p>
+
+<%= link_to "Send Friend Request", friend_requests_path(:requestor_id => current_user, :requestee_id => @profile.user, :is_pending => 1), method: :post%>
+
+<div>
+  <br>
+</div>
+
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: name %>
+<% end -%>
