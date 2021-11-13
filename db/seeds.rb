@@ -34,3 +34,8 @@ User.create(email: 'katy@email.com', password: 'password', name: 'Katy')
 Profile.create(user_id: 8)
 User.create(email: 'tom@email.com', password: 'password', name: 'Tom')
 Profile.create(user_id: 9)
+
+FriendRequest.create(requestor_id: 2, requestee_id: 1, is_pending: true)
+FriendRequest.create(requestor_id: 3, requestee_id: 1, is_pending: true)
+FriendRequest.create(requestor_id: 4, requestee_id: 1, is_pending: true)
+FriendRequest.create(requestor_id: 5, requestee_id: 1, is_pending: true)
