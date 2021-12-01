@@ -1,20 +1,41 @@
 <h1><%= "#{@user.name}'s"%> Home Page</h1>
 
-<div>
+<%= button_to "New Post", new_post_path, method: :get%>
+
+<div id = 'posts'>
   <h2>Posts</h2>
+    <ul>
+      <% Post.all.reverse_each do |post| %>
+        <li>
+          User: <%= post.user.name %> | Body: <%= post.body %> | Likes: <%= post.likes.length %> | Comments: <%= post.comments.length %>
+          <ul>Comments
+            <% post.comments.each do |comment| %>
+              <li>
+                User: <%= comment.user.name %> | Body: <%= comment.body %>
+              </li>
+            <% end %>
+          </ul>
+          <% if post.likes.exists?(user_id: current_user) %>
+            <%= button_to "Unlike", like_path(post.likes.where(user_id: current_user).first), method: :delete %>
+          <% else %>
+            <%= button_to "Like", likes_path, method: :post, params: { post_id: post,  user_id: current_user } %>
+          <% end %>
+          <%= button_to "Comment", new_comment_path, method: :get, params: { post: post } %>
+        </li>
+      <% end %>
+    </ul>
 </div>
 
-<div>
+<div id = 'friends_and_requests'>
   <h2>Friends</h2>
   <ul>
     <% @user.friends.each do |friend| %>
       <li>
-        <%= friend.name %>
+        <%= link_to friend.name, friend.profile %>
       </li>
     <% end %>
-</div>
+  </ul>
 
-<div>
   <h2>Friend Requests</h2>
   <ul>
     <% @user.received_friend_requests.each do |request|%>

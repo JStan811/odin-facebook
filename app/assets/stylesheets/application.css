@@ -34,3 +34,11 @@ body {
   background-color: #ddd;
   color: black;
 }
+
+#posts {
+  float: left;
+}
+
+#friends_and_requests {
+  float: right;
+}

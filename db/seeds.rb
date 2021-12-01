@@ -7,6 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # First delete all data and reset id counter(not necessary, I just like it :))
+Comment.delete_all
+ActiveRecord::Base.connection.reset_pk_sequence!('comments')
+Like.delete_all
+ActiveRecord::Base.connection.reset_pk_sequence!('likes')
+Post.delete_all
+ActiveRecord::Base.connection.reset_pk_sequence!('posts')
 Profile.delete_all
 ActiveRecord::Base.connection.reset_pk_sequence!('profiles')
 FriendRequest.delete_all
@@ -15,6 +21,7 @@ UserFriend.delete_all
 ActiveRecord::Base.connection.reset_pk_sequence!('user_friends')
 User.delete_all
 ActiveRecord::Base.connection.reset_pk_sequence!('users')
+
 
 User.create(email: 'jake@email.com', password: 'password', name: 'Jake')
 Profile.create(user_id: 1)
