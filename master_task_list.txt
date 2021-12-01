@@ -1,0 +1,8 @@
+  - Steps in TOP instructions still to do: 6ish, 13, 15, 16, 17, 18
+
+Misc.
+  - Do I need a Homepage resource? Currently my homepage is just user#show and is set based on the currently logged in user. Further should user#show be the profile?
+  - Add a button/link to cancel/decline a friend request
+  - currently posts from all people are shown on the homepage (not just self + friends)
+  - Fix My Profile link in nav bar (check if user is signed in before)
+  - profile: add list of friends and posts

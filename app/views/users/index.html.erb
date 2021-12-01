@@ -5,6 +5,11 @@
     <% unless user == current_user %>
       <li>
           <%= link_to user.name, user.profile %>
+          <% unless FriendRequest.exists?(requestor_id: current_user, requestee_id: user, is_pending: true) || FriendRequest.exists?(requestor_id: user, requestee_id: current_user, is_pending: true) || current_user.friends.exists?(user.id) %>
+            <%= button_to "Send Friend Request", friend_requests_path(:requestor_id => current_user, :requestee_id => user, :is_pending => 1), method: :post%>
+          <% else %>
+            <p>You are friends or there is a pending request.</p>
+          <% end %>
       </li>
     <% end %>
   <% end %>

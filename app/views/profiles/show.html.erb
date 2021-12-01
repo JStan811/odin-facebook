@@ -1,10 +1,14 @@
 <h2><%= @profile.user.name %></h2>
 
-<p>photo: <%= @profile.photo_url %>
+<p>photo: <img src="<%= @profile.photo_url %>" width="300" height="200"></p>
 
 <p>bio: <%= @profile.bio %></p>
 
-<%= link_to "Send Friend Request", friend_requests_path(:requestor_id => current_user, :requestee_id => @profile.user, :is_pending => 1), method: :post%>
+<% unless FriendRequest.exists?(requestor_id: current_user, requestee_id: @profile.user, is_pending: true) || FriendRequest.exists?(requestor_id: @profile.user, requestee_id: current_user, is_pending: true) || current_user.friends.exists?(@profile.user.id) %>
+  <%= link_to "Send Friend Request", friend_requests_path(:requestor_id => current_user, :requestee_id => @profile.user, :is_pending => 1), method: :post%>
+<% else %>
+  <p>You are friends or there is a pending request.</p>
+<% end %>
 
 <div>
   <br>
